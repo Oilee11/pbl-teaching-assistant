@@ -22,7 +22,7 @@
 ## 快速启动
 
 1. **配置环境**:
-   复制 `.env.example` 为 `.env` 并填入您的 `OPENAI_API_KEY`。
+   复制 `.env.example` 为 `.env` 并填入您的 `OPENAI_API_KEY`和`JWT_SECRET`。
 
    ```bash
    cp .env.example .env
