@@ -1,0 +1,40 @@
+#  docker-compose运行时，创建一个虚拟网络，所有容器通过内置的DNS解析实现相互通信
+services:  #关键字，指明容器
+  db:
+    image: ankane/pgvector:latest  #  总是拉取pgvector最新镜像，pgvector是一个用于PostgreSQL的向量数据库扩展，用于存储和查询向量数据
+    ports:
+      - "5432:5432"  #  端口映射：“宿主机端口：容器端口”
+    environment:
+      POSTGRES_DB: pbl_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+    #  命名卷挂载：将卷挂载到该目录下，在该目录下生成的数据库文件将自动保存在docker卷下，不会随着容器删除而删除，实现持久化存储数据
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+
+  backend:
+    build: ./backend  #  使用该目录下的dockerfile构建镜像
+    ports:
+      - "8000:8000"
+      #  读取环境变量或.env文件：${}
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/pbl_db
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+    depends_on:  #  先启动数据库，后端依赖
+      - db
+    #  绑定挂载：把后端目录下的所有文件夹映射到容器内，实现同步本地代码，立马生效
+    volumes:
+      - ./backend:/app  
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:  #  声明卷名，由docker创建的卷保存在电脑硬盘下，但是由docker管理
