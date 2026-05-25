@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 环境变量
 .env
 .env.local
@@ -36,4 +37,44 @@ backend/uploads/
 
 # 临时文件
 *.tmp
+=======
+# 环境变量
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+*.egg-info/
+
+# 前端
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+
+# Docker数据
+postgres_data/
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# 日志
+*.log
+
+# 数据库
+*.db
+*.sqlite
+
+# 上传文件
+backend/uploads/
+
+# 临时文件
+*.tmp
+>>>>>>> 32d2f057e90bd5beaef965e4e62fef5b8f9e5b17
 *.bak
