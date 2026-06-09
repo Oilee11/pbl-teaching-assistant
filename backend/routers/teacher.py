@@ -144,7 +144,16 @@ def get_student_codes(
             "created_at": code.created_at
         } for code, username in results
     ]
-
+@router.get("/web-search")
+def teacher_web_search(
+    query: str,
+    current_user: models.User = Depends(auth.check_role(models.UserRole.TEACHER))
+):
+    """
+    教师联网搜索 - 使用智谱 AI 内置联网搜索
+    """
+    results = rag.web_search(query)
+    return {"results": results}
 # @router.post("/web-search/save")
 # def save_web_resource(
 #     url: str,

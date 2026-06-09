@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Send, User, Bot, Star, Loader2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';      
+import remarkGfm from 'remark-gfm'; 
 import api from '../api';
 
 export default function StudentQA() {
@@ -73,7 +75,21 @@ const handleSend = async (e: React.FormEvent) => {
               <div className={`p-4 rounded-2xl shadow-sm ${
                 msg.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none'
               }`}>
-                <div className="whitespace-pre-wrap">{msg.content}</div>
+
+                {/* 根据角色决定渲染方式 */}
+                {msg.role === 'bot' ? (
+                  <div className="prose prose-blue max-w-none 
+                                prose-headings:mt-4 prose-headings:mb-2 
+                                prose-p:my-2 prose-ul:my-2 prose-li:my-0
+                                prose-code:bg-gray-100 prose-code:px-1 prose-code:rounded
+                                prose-pre:bg-gray-800 prose-pre:text-white">
+                   <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                     {msg.content}
+                   </ReactMarkdown>
+                  </div>
+                ) : (
+                 <div className="whitespace-pre-wrap">{msg.content}</div>
+                )}
                 {msg.sources && msg.sources.length > 0 && (
                   <div className="mt-3 pt-2 border-t border-gray-100 text-xs text-gray-400">
                     来源: {msg.sources.join(', ')}

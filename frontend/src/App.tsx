@@ -12,7 +12,6 @@ import StudentResources from './pages/StudentResources';
 import StudentNotes from './pages/StudentNotes';
 import StudentCodeUpload from './pages/StudentCodeUpload';
 import WebSearch from './pages/WebSearch';
-
 // 根据角色自动重定向首页的组件
 const HomeRedirect = () => {
   const userStr = localStorage.getItem('user');

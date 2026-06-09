@@ -33,7 +33,11 @@ app = FastAPI(title="高校教师项目式教学备课智能体")
 # allow_headers: 允许的请求头，*表示所有头
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:8000",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

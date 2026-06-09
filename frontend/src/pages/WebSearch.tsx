@@ -24,7 +24,7 @@ export default function WebSearch() {
 
     try {
       // api 请求拦截器已自动从 localStorage 读取 token 并注入请求头
-      const res = await api.get(`/student/web-search?query=${encodeURIComponent(query)}`);
+      const res = await api.get(`/teacher/web-search?query=${encodeURIComponent(query)}`);
 
       const resultsStr: string = res.data.results;
 
