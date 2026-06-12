@@ -15,7 +15,7 @@
 - **学习笔记**: 记录个人学习笔记。
 
 ## 技术栈
-- **后端**: FastAPI, PostgreSQL, pgvector, SQLAlchemy, OpenAI API, LangChain
+- **后端**: FastAPI, PostgreSQL, pgvector, SQLAlchemy, OpenAI API
 - **前端**: React, Vite, Tailwind CSS, Lucide Icons
 - **部署**: Docker, Docker Compose
 
